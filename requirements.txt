@@ -1,0 +1,27 @@
+# Web API
+fastapi==0.111.0
+uvicorn[standard]==0.30.0
+
+# Banco de dados
+sqlalchemy==2.0.30
+
+# Templates HTML
+jinja2==3.1.4
+
+# Agendamento de tarefas
+apscheduler==3.10.4
+
+# Cliente HTTP
+requests==2.32.3
+
+# Validações (Pydantic V2)
+pydantic==2.8.2
+pydantic-core==2.20.1
+
+# Selenium (opcional, automação do LinkedIn)
+selenium==4.23.1
+
+# Dotenv (para variáveis de ambiente)
+python-dotenv==1.0.1
+
+openai>=1.0.0
