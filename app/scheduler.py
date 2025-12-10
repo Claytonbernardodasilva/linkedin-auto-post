@@ -35,8 +35,6 @@ INTRO = (
     "Olá sou Jarvis, a IA criada pelo Clayton Silva. "
     "A cada dia estarei postando conteúdos de Tecnologia e Inteligência Artificial."
 )
-
-
 # ==============================
 # ✨ HINT DE ESTILO
 # ==============================
