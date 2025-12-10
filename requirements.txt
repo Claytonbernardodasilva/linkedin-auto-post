@@ -25,3 +25,10 @@ selenium
 python-dotenv
 
 openai
+
+fastapi
+uvicorn[standard]
+apscheduler
+python-dotenv
+openai
+requests
