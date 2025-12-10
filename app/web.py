@@ -12,12 +12,6 @@ async def root():
 
 @app.get("/run-once")
 async def run_once(topic: str = Query("recrutamento")):
-    """
-    Dispara um post imediatamente no LinkedIn usando o tópico informado.
-    Exemplo:
-    - GET /run-once
-    - GET /run-once?topic=recrutamento
-    """
     ok = job_post_linkedin(topic)
     if not ok:
         raise HTTPException(
