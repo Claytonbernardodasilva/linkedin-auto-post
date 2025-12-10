@@ -158,14 +158,15 @@ def gerar_texto_ia(topic: str) -> str:
 # ==============================
 # 🚀 Função que publica no LinkedIn
 # ==============================
-def job_post_linkedin(topic: str):
+def job_post_linkedin(topic: str) -> bool:
     try:
         texto = gerar_texto_ia(topic)
         publicar_post(texto)
         logger.info(f"Post publicado com sucesso ({topic}).")
+        return True
     except Exception as e:
         logger.error(f"Erro ao publicar post: {e}")
-
+        return False
 
 # ==============================
 # 📅 Scheduler — 10h e 14h, seg–sex
