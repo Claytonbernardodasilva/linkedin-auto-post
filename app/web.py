@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException, Query
 
 app = FastAPI()
 
@@ -8,10 +8,29 @@ async def root():
     return {"message": "LinkedIn Auto Post backend online"}
 
 
-@app.get("/run-once-test")
-async def run_once_test():
+@app.get("/run-once")
+async def run_once(topic: str = Query("recrutamento")):
     """
-    Endpoint de teste só pra confirmar que a segunda rota aparece no Cloud Run.
-    NÃO chama LinkedIn nem scheduler ainda.
+    Dispara um post imediatamente no LinkedIn usando o tópico informado.
+
+    Exemplos:
+    - GET /run-once
+    - GET /run-once?topic=recrutamento
     """
-    return {"status": "ok", "info": "Rota /run-once-test está funcionando no Cloud Run"}
+    # Importa só na HORA da chamada, pra não quebrar o startup do container
+    try:
+        from app.scheduler import job_post_linkedin
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Erro ao importar scheduler: {e}"
+        )
+
+    ok = job_post_linkedin(topic)
+    if not ok:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Erro ao publicar post no LinkedIn para o tópico '{topic}'. Veja os logs do Cloud Run."
+        )
+
+    return {"status": "ok", "topic": topic}
