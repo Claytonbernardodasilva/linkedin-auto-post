@@ -17,7 +17,7 @@ async def run_once(topic: str = Query("recrutamento")):
     - GET /run-once
     - GET /run-once?topic=recrutamento
     """
-    # Importa só na HORA da chamada, pra não quebrar o startup do container
+    # Importa o scheduler só na hora da chamada
     try:
         from app.scheduler import job_post_linkedin
     except Exception as e:
